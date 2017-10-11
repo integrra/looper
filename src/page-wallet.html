@@ -54,8 +54,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     }
 
     _subpageChanged(subpage) {
-      // Load page import on demand. Show 404 page if fails
-      var resolvedPageUrl = this.resolveUrl('page-wallet-' + subpage + '.html');
+      if (subpage === "" || subpage == undefined) {
+        this.subpage = "default";
+      }
+
+      var resolvedPageUrl = this.resolveUrl('page-wallet-' + this.subpage + '.html');
       Polymer.importHref(
         resolvedPageUrl,
         null,
