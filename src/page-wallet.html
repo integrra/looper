@@ -28,7 +28,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <looper-page>
       <looper-toolbar slot="secondary-toolbar" active-tab="wallet"> </looper-toolbar>
       <app-header-layout>
-        <iron-pages selected="[[subpage]]" attr-for-selected="name" fallback-selection="404" role="main">
+        <iron-pages selected="[[sub]]" attr-for-selected="name" fallback-selection="404" role="main">
           <page-wallet-default name="default"></page-wallet-default>
           <page-wallet-unlock name="unlock"></page-wallet-unlock>
           <page-wallet-generate name="generate"></page-wallet-generate>
@@ -47,18 +47,26 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       return {
         subpage: {
           type: String,
-          value: 'default',
-          observer: '_subpageChanged',
+          value: 'default'
+        },
+        sub: {
+          type: String,
+          computed: 'computeSub(subpage)',
+          observer: '_subChanged',
         }
       };
     }
 
-    _subpageChanged(subpage) {
-      if (subpage === "" || subpage == undefined) {
-        this.subpage = "default";
+    computeSub(subpage) {
+      var sub = subpage;
+      if (subpage === "" || subpage === null || subpage == undefined) {
+        sub = "default";
       }
+      return sub;
+    }
 
-      var resolvedPageUrl = this.resolveUrl('page-wallet-' + this.subpage + '.html');
+    _subChanged(sub) {
+      var resolvedPageUrl = this.resolveUrl('page-wallet-' + sub + '.html');
       Polymer.importHref(
         resolvedPageUrl,
         null,
