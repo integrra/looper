@@ -21,13 +21,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       color: white;
       background-color: var(--google-grey-700);
     }
+
+    paper-icon-button {
+      color: white;
+    }
     </style>
     <looper-page>
       <app-toolbar>
         <div condensed-title></div>
         Settings
         <div condensed-title></div>
-        <paper-icon-button noink on-click="close" icon="close"></paper-icon-button>
+        <a href="/#/">
+          <paper-icon-button noink icon="close"></paper-icon-button>
+        </a>
       </app-toolbar>
       <div class="sections">
         <paper-card>
@@ -43,9 +49,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     static get is() {
       return 'page-settings';
     }
-    close() {
-      window.history.back();
-    }
+
   }
 
   window.customElements.define(PageSettings.is, PageSettings);
